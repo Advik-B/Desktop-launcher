@@ -1,2 +1,3 @@
 PyQt6 # GUI framework
 plyer # for notifications
+pillow # for image processing
