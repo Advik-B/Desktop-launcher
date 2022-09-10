@@ -21,6 +21,15 @@ from ctypes import windll
 AppID = "advik.desktop_launcher.1"
 windll.shell32.SetCurrentProcessExplicitAppUserModelID(AppID)
 
+from plyer import notification
+
+
+notification.notify(
+    title = 'testing',
+    message = 'message',
+    app_icon = "",
+    timeout = 10,
+)
 class UI(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -40,7 +49,9 @@ class UI(QMainWindow):
             # winT.WindowOverridesSystemGestures |
             # winT.NoDropShadowWindowHint |
             winT.WindowTitleHint |
-            winT.CustomizeWindowHint
+            winT.CustomizeWindowHint |
+            winT.WindowCloseButtonHint #|
+            # winT.WindowMaximizeButtonHint
         )
         del winT
         # Make the window fullscreen
