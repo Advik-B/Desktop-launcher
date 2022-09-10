@@ -27,7 +27,7 @@ from plyer import notification
 notification.notify(
     title = 'testing',
     message = 'message',
-    app_icon = "",
+    app_icon = "assets/rocket.ico",
     timeout = 10,
 )
 class UI(QMainWindow):
