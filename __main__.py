@@ -110,7 +110,17 @@ def main():
 
 
 def create_settings():
-    pass
+    default_settings = {
+        "window_flags": [
+            "WindowTitleHint",
+            "CustomizeWindowHint",
+            "WindowCloseButtonHint"
+        ],
+        "current_theme": "dark",
+        "wallpaper": "res://assets/PR-Demo.png",
+    }
+    with open("settings.json", "wb") as f:
+        f.write(json.dumps(default_settings).encode("utf-8"))
 
 
 if __name__ == "__main__":
