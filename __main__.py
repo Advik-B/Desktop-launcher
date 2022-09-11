@@ -1,3 +1,9 @@
+
+from rich.console import Console
+from rich.traceback import install
+
+install()
+
 import json
 import os
 import sys
@@ -18,7 +24,6 @@ from PyQt6.QtWidgets import (
     QPushButton,
     QWidget,
 )
-
 AppID = "advik.desktop_launcher.1"
 windll.shell32.SetCurrentProcessExplicitAppUserModelID(AppID)
 
@@ -47,14 +52,7 @@ class UI(QMainWindow):
 
         winT = Qt.WindowType
 
-        self.setWindowFlags(
-            # winT.WindowOverridesSystemGestures |
-            # winT.NoDropShadowWindowHint |
-            winT.WindowTitleHint
-            | winT.CustomizeWindowHint
-            | winT.WindowCloseButtonHint  # |
-            # winT.WindowMaximizeButtonHint
-        )
+        apply_settings(self)
         del winT
         # Make the window fullscreen
         self.maxi = False
@@ -123,16 +121,22 @@ def create_settings():
         f.write(json.dumps(default_settings).encode("utf-8"))
 
 def apply_settings(UI):
-    with open("settings.json", "rb") as f:
-        settings = json.loads(f.read().decode("utf-8"))
-
+    try:
+        with open("settings.json", "rb") as f:
+            settings = json.loads(f.read().decode("utf-8"))
+    except (FileNotFoundError, json.decoder.JSONDecodeError):
+        create_settings()
+        apply_settings(UI)
+        return
     winT = Qt.WindowType
-    {
-        "WindowTitleHint": winT.WindowTitleHint,
-        "CustomizeWindowHint": winT.CustomizeWindowHint,
-        "WindowCloseButtonHint": winT.WindowCloseButtonHint,
-        
-    }
+    try:
+        for flag in settings["window_flags"]:
+            UI.setWindowFlag(getattr(winT, flag))
+    except AttributeError:
+        create_settings()
+        apply_settings(UI)
+        return
+
 
 if __name__ == "__main__":
     main()
