@@ -118,7 +118,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@Advik_B](https://twitter.com/Advik_B) - advik.b@gmail.com@Gmail.com
+Twitter - [@Advik_B](https://twitter.com/Advik_B)
+
+Email: advik.b@gmail.com
 
 Project Link: [https://github.com/Advik-B/Desktop-launcher](https://github.com/Advik-B/Desktop-launcher)
 
