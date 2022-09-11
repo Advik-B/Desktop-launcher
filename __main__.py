@@ -122,6 +122,17 @@ def create_settings():
     with open("settings.json", "wb") as f:
         f.write(json.dumps(default_settings).encode("utf-8"))
 
+def apply_settings(UI):
+    with open("settings.json", "rb") as f:
+        settings = json.loads(f.read().decode("utf-8"))
+
+    winT = Qt.WindowType
+    {
+        "WindowTitleHint": winT.WindowTitleHint,
+        "CustomizeWindowHint": winT.CustomizeWindowHint,
+        "WindowCloseButtonHint": winT.WindowCloseButtonHint,
+        
+    }
 
 if __name__ == "__main__":
     main()
